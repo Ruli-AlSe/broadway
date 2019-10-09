@@ -24,6 +24,29 @@ class PlaysController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @play.update(play_params)
+      flash[:success] = "Play was successfully updated"
+      redirect_to @play
+    else
+      flash[:error] = "Something went wrong"
+      render 'edit'
+    end
+  end
+
+  def destroy
+    if @play.destroy
+      flash[:success] = 'Play was successfully deleted.'
+      redirect_to root_path
+    else
+      flash[:error] = 'Something went wrong'
+      redirect_to @play
+    end
+  end
+
 private
 
   def play_params
